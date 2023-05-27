@@ -44,8 +44,8 @@ const CoffeeStore = (props) => {
     if (router.isFallback) {
         return <div>Loading...</div>;
     }
-
-    const {address,name,neighbourhood} = props.coffeeStore
+    const handleUpvoteButton = async () => {}
+    const {address,name,neighbourhood,imgUrl} = props.coffeeStore
 
     return (
         <div className={styles.layout}>
@@ -105,7 +105,9 @@ const CoffeeStore = (props) => {
                         />
                         <p className={styles.text}>{0}</p>
                     </div>
-
+                    <button className={styles.upvoteButton} onClick={handleUpvoteButton}>
+                        Up vote!
+                    </button>
                 </div>
             </div>
         </div>
