@@ -1,14 +1,28 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
-import Banner from "@/pages/components/banner";
-import Card from "@/pages/components/card";
+import Banner from "@/components/banner";
+import Card from "@/components/card";
 
-export default function Home() {
+
+import coffeeStoresData from "@/data/coffee-stores.json"
+
+export async function getStaticProps(context) {
+
+
+    return {
+        props: {
+            coffeeStores:coffeeStoresData
+        }, // will be passed to the page component as props
+    };
+}
+
+export default function Home(props) {
     const handleOnBannerBtnClick = () => {
         // handleTrackLocation();
         console.log("Hi Banner Button")
     };
+
 
   return (
     <>
@@ -31,14 +45,28 @@ export default function Home() {
             />
         </div>
 
-        <div className={styles.cardLayout}>
-            <Card
-                name={"DarkHorse Coffee"}
-                imageUrl={"/static/hero-image.png"}
-                href={"/coffee-store/darkhorse-coffee"}
-                className={styles.card}
-            />
-        </div>
+        {
+            props.coffeeStores.length > 0 &&
+            <>
+            <h2 className={styles.heading2}>Toronto stores</h2>
+            <div className={styles.cardLayout}>
+                {props.coffeeStores.map((coffeeStore) => {
+                    return (
+                        <Card
+                            key={coffeeStore.id}
+                            name={coffeeStore.name}
+                            imgUrl={coffeeStore.imgUrl ||
+                                "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
+                            }
+                            href={`/coffee-store/${coffeeStore.id}`}
+                            className={styles.card}
+                        />
+                    );
+                })}
+            </div>
+            </>
+        }
+
 
       </>
   )
