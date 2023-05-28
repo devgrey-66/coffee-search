@@ -5,14 +5,14 @@ import Banner from "@/components/banner";
 import Card from "@/components/card";
 
 
-import coffeeStoresData from "@/data/coffee-stores.json"
+import {fetchCoffeeStores} from "@/lib/coffee-store";
 
 export async function getStaticProps(context) {
-
-
+    const coffeeStores = await fetchCoffeeStores()
+    console.log(coffeeStores)
     return {
         props: {
-            coffeeStores:coffeeStoresData
+            coffeeStores:coffeeStores
         }, // will be passed to the page component as props
     };
 }
