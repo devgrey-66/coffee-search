@@ -6,13 +6,12 @@ import Image from "next/image";
 
 
 import cls from "classnames";
-
 import styles from "../../styles/coffee-store.module.css";
-
-import coffeeStores from "@/data/coffee-stores.json";
+import {fetchCoffeeStores} from "@/lib/coffee-store";
 
 export async function getStaticProps(staticProps) {
     const params = staticProps.params;
+    const coffeeStores = await fetchCoffeeStores()
 
     const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
         return coffeeStore.id.toString() === params.id; //dynamic id
@@ -24,7 +23,8 @@ export async function getStaticProps(staticProps) {
     };
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths(){
+    const coffeeStores = await fetchCoffeeStores()
     const paths = coffeeStores.map((coffeeStore) => {
         return {
             params: {
@@ -66,8 +66,8 @@ const CoffeeStore = (props) => {
                             imgUrl ||
                             "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
                         }
-                        width={600}
-                        height={360}
+                        width={550}
+                        height={200}
                         className={styles.storeImg}
                         alt={name}
                     />
