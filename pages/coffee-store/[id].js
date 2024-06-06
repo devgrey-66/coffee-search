@@ -1,5 +1,5 @@
 import React from "react";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
@@ -23,7 +23,7 @@ export async function getStaticProps(staticProps) {
     };
 }
 
-export async function getStaticPaths(){
+export async function getStaticPaths() {
     const coffeeStores = await fetchCoffeeStores()
     const paths = coffeeStores.map((coffeeStore) => {
         return {
@@ -44,14 +44,15 @@ const CoffeeStore = (props) => {
     if (router.isFallback) {
         return <div>Loading...</div>;
     }
-    const handleUpvoteButton = async () => {}
-    const {address,name,neighbourhood,imgUrl} = props.coffeeStore
+    const handleUpvoteButton = async () => {
+    }
+    const {address, name, neighbourhood, imgUrl} = props.coffeeStore
 
     return (
         <div className={styles.layout}>
             <Head>
                 <title>{name}</title>
-                <meta name="description" content={`${name} coffee store`} />
+                <meta name="description" content={`${name} coffee store`}/>
             </Head>
             <div className={styles.container}>
                 <div className={styles.col1}>
