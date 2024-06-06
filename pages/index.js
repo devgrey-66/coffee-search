@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import Banner from "@/components/banner";
 import Card from "@/components/card";
@@ -12,7 +11,6 @@ import {ACTION_TYPES, StoreContext} from "@/store/store-context";
 
 export async function getStaticProps(context) {
     const coffeeStores = await fetchCoffeeStores()
-    console.log(coffeeStores)
     return {
         props: {
             coffeeStores: coffeeStores
@@ -27,13 +25,12 @@ export default function Home(props) {
     const {dispatch, state} = useContext(StoreContext);
 
     const {latLong, coffeeStores} = state;
-    console.log(latLong, coffeeStores)
 
     useEffect(() => {
         const fetchCoffeeStoresData = async () => {
             if (latLong) {
                 try {
-                    const coffeeStores = await fetchCoffeeStores(latLong, 30)
+                    const coffeeStores = await fetchCoffeeStores(latLong, 15)
                     dispatch({
                         type: ACTION_TYPES.SET_COFFEE_STORES, payload: {coffeeStores}
                     })
@@ -44,18 +41,13 @@ export default function Home(props) {
         }
 
         fetchCoffeeStoresData().then(data => {
-            console.log(data)
-        });
+
+        })
     }, [latLong]);
 
     const handleOnBannerBtnClick = () => {
         handleTrackLocation();
     };
-
-    console.log({
-        latLong, locationErrorMsg
-    })
-
 
     return (<>
         <Head>
@@ -69,49 +61,43 @@ export default function Home(props) {
             <Banner buttonText={isFindingLocation ? "Locating..." : "View stores nearby"}
                     handleOnClick={handleOnBannerBtnClick}/>
         </main>
+
         {locationErrorMsg && <p>Something went wrong: {locationErrorMsg}</p>}
         {coffeeStoreError && <p>Something went wrong: {coffeeStoreError}</p>}
-        <div className={styles.heroImage}>
-            <Image
-                src="/static/hero-image.png"
-                width={700}
-                height={400}
-                alt="hero image"
-            />
+
+        <div className={styles.storesNearMe}>
+
+            {coffeeStores.length > 0 && <>
+                <h2 className={styles.heading2}>Stores Near me</h2>
+                <div className={styles.cardLayout}>
+                    {coffeeStores.map((coffeeStore) => {
+                        return (<Card
+                            key={coffeeStore.id}
+                            name={coffeeStore.name}
+                            imgUrl={coffeeStore.imgUrl || "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"}
+                            href={`/coffee-store/${coffeeStore.id}`}
+                            className={styles.card}
+                        />);
+                    })}
+
+                </div>
+            </>}
+
+            {props.coffeeStores.length > 0 && <>
+                <h2 className={styles.heading2}>Random Coffee Stores</h2>
+                <div className={styles.cardLayout}>
+                    {props.coffeeStores.map((coffeeStore) => {
+                        return (<Card
+                            key={coffeeStore.id}
+                            name={coffeeStore.name}
+                            imgUrl={coffeeStore.imgUrl || "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"}
+                            href={`/coffee-store/${coffeeStore.id}`}
+                            className={styles.card}
+                        />);
+                    })}
+
+                </div>
+            </>}
         </div>
-
-        {coffeeStores.length > 0 && <>
-            <h2 className={styles.heading2}>Stores Near me</h2>
-            <div className={styles.cardLayout}>
-                {coffeeStores.map((coffeeStore) => {
-                    return (<Card
-                        key={coffeeStore.id}
-                        name={coffeeStore.name}
-                        imgUrl={coffeeStore.imgUrl || "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"}
-                        href={`/coffee-store/${coffeeStore.id}`}
-                        className={styles.card}
-                    />);
-                })}
-
-            </div>
-        </>}
-
-        {props.coffeeStores.length > 0 && <>
-            <h2 className={styles.heading2}>Toronto stores</h2>
-            <div className={styles.cardLayout}>
-                {props.coffeeStores.map((coffeeStore) => {
-                    return (<Card
-                        key={coffeeStore.id}
-                        name={coffeeStore.name}
-                        imgUrl={coffeeStore.imgUrl || "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"}
-                        href={`/coffee-store/${coffeeStore.id}`}
-                        className={styles.card}
-                    />);
-                })}
-
-            </div>
-        </>}
-
-
     </>)
 }

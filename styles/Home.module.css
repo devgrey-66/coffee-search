@@ -3,10 +3,19 @@
 }
 
 .main {
-  margin-top: 2.5rem /* 40px */;
+  margin-top: 2rem /* 40px */;
   margin-left: auto;
   margin-right: auto;
   max-width: 72rem /* 1152px */;
+  padding-left: 1rem /* 16px */;
+  padding-right: 1rem /* 16px */;
+}
+
+.storesNearMe {
+  margin-top: 6rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 79.25rem /* 1268px */;
   padding-left: 1rem /* 16px */;
   padding-right: 1rem /* 16px */;
 }
