@@ -1,38 +1,156 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ☕ Coffee Search App
 
-## Getting Started
+A modern **Next.js** application to help users discover nearby coffee shops using real-time data from the **Foursquare Places API** and beautiful photos from the **Unsplash API**.
 
-First, run the development server:
+Built with scalability and performance in mind, this app is a great foundation for location-based services.
+
+---
+
+## 🔗 Live Demo
+
+Coming soon!
+
+---
+
+## 🧹 Features
+
+* 🔍 Search coffee shops in any location
+* 🌍 Geolocation-based search support
+* 🖼 Fetch coffee shop images using Unsplash API
+* 🚀 Built on Next.js with TypeScript
+* ⚙️ API integration using Axios
+* 🩼 Responsive UI with Tailwind CSS (optional)
+* 🔒 Secure environment configuration with `.env.local`
+
+---
+
+## 🏠 Tech Stack
+
+| Technology     | Description                      |
+| -------------- | -------------------------------- |
+| Next.js        | React Framework with SSR support |
+| TypeScript     | Type-safe JavaScript             |
+| Axios          | Promise-based HTTP client        |
+| Foursquare API | Coffee shop data                 |
+| Unsplash API   | Coffee-related images            |
+| Tailwind CSS   | Utility-first styling (optional) |
+
+---
+
+## 📂 Project Structure
+
+```
+coffee-search/
+├── components/          # Reusable components
+├── lib/                 # API utility functions
+├── pages/               # Next.js routing pages
+│   └── index.tsx        # Home page
+├── public/              # Static files (icons, etc.)
+├── styles/              # Global CSS (if any)
+├── .env.local           # Local env vars (ignored)
+├── .gitignore
+└── README.md
+```
+
+---
+
+## ⚙️ Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/devgrey-66/coffee-search.git
+cd coffee-search
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+# or
+yarn
+```
+
+### 3. Configure Environment Variables
+
+Create a `.env.local` file in the root directory:
+
+```env
+NEXT_PUBLIC_FOURSQUARE_API_KEY=your_foursquare_api_key
+NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=your_unsplash_access_key
+```
+
+> ❟️ `.env.local` is automatically excluded from version control.
+
+### 4. Run the Development Server
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+---
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 🌐 API Usage
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### 📍 Foursquare Places API
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Used to fetch real-time data about coffee shops:
 
-## Learn More
+* Endpoint: `https://api.foursquare.com/v3/places/search`
+* Required Header: `Authorization: ${YOUR_API_KEY}`
 
-To learn more about Next.js, take a look at the following resources:
+Docs: [https://developer.foursquare.com/docs/places-api/](https://developer.foursquare.com/docs/places-api/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 🖼 Unsplash API
 
-## Deploy on Vercel
+Used to fetch images related to coffee or specific shop names:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* Endpoint: `https://api.unsplash.com/search/photos`
+* Requires: `client_id` as query parameter
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Docs: [https://unsplash.com/documentation](https://unsplash.com/documentation)
+
+---
+
+---
+
+## ✅ Best Practices
+
+* 🔒 Never expose sensitive environment variables publicly.
+* 🩼 Clean code structure with clear separation of concerns.
+* 📁 Keep API utilities in `lib/` and reusable UI in `components/`.
+
+---
+
+## 🚀 Deployment (Optional)
+
+You can deploy this app easily to [Vercel](https://vercel.com/) with just a few clicks:
+
+1. Push your code to GitHub
+2. Go to Vercel and import the repository
+3. Add the same environment variables (`.env.local`) in the Vercel dashboard
+4. Click **Deploy**
+
+---
+
+## 👨‍💼 Contributing
+
+Contributions are welcome!
+
+1. Fork the repo
+2. Create your branch: `git checkout -b feature/my-feature`
+3. Commit your changes: `git commit -m 'Add my feature'`
+4. Push to the branch: `git push origin feature/my-feature`
+5. Open a Pull Request
+
+---
+
+## 📜 License
+
+M
